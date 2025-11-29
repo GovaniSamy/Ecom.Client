@@ -3,10 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { SharedModule } from './shared/shared-module';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment.development';
+import { Login } from './components/login/login';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, SharedModule],
+  imports: [RouterOutlet, SharedModule,Login],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -32,6 +33,11 @@ export class App implements OnInit{
   
   ngOnInit(): void {
     this.getWeather();
+  }
+
+  KeyUpHandler(event : KeyboardEvent)
+  {
+    console.log(`user PRessed the ${event.key} Key`)
   }
 
 }
