@@ -6,6 +6,7 @@ import { Product, ProductFilter, Category, Brand } from '../../../core/models/pr
 import { PageEvent } from '@angular/material/paginator';
 import { SearchFilterComponent } from '../search-filter/search-filter.component';
 import { WishlistService } from '../../../core/services/wishlist-service';
+import { CartService } from '../../../core/services/cart-service';
 
 
 @Component({
@@ -43,6 +44,7 @@ export class ProductListComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
+    private cartService: CartService,
     private router: Router
   ) {}
 
@@ -274,9 +276,21 @@ loadProducts(): void {
 
   // Add to cart (to be implemented)
   onAddToCart(product: Product): void {
-    console.log('Add to cart:', product);
-    // TODO: Implement cart service
-  }
+  if (!product?.id) return; // safety guard
+
+  console.log("ProductList received:", product);
+
+  this.cartService.addToCart(product.id, 1,product.price).subscribe({
+    next: () => {
+      console.log("Added to cart successfully");
+    },
+    error: () => {
+      console.error("Failed to add product to cart:");
+    }
+  });
+}
+
+
 
   // Add to wishlist (to be implemented)
   onAddToWishlist(product: Product): void {
