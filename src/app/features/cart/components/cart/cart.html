@@ -47,14 +47,12 @@
         <!-- QUANTITY COLUMN -->
         <ng-container matColumnDef="quantity">
           <th mat-header-cell *matHeaderCellDef> Qty </th>
-          <td mat-cell class="mat-column-quantity qty-controls" *matCellDef="let item">
+          <td mat-cell class="mat-column-quantity" *matCellDef="let item">
             <div class="qty-controls">
               <button mat-icon-button (click)="updateQuantity(item, item.quantity - 1)" [disabled]="item.quantity <= 1">
                 <mat-icon>remove</mat-icon>
               </button>
-
               <span class="qty">{{ item.quantity }}</span>
-
               <button mat-icon-button (click)="updateQuantity(item, item.quantity + 1)">
                 <mat-icon>add</mat-icon>
               </button>
